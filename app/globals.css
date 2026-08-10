@@ -100,20 +100,20 @@
   justify-content: center;
   gap: 0.6rem;
   padding: 0.875rem 1.75rem;
-  background-color: var(--berry);
+  background-color: #7F0F99;
   color: #ffffff;
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 0.9375rem;
   border-radius: var(--radius-full);
-  box-shadow: 0 4px 14px rgba(194, 72, 104, 0.25);
+  box-shadow: 0 4px 14px rgba(127, 15, 153, 0.3);
   transition: transform var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .btnPrimary:hover {
-  background-color: #aa3d5a;
+  background-color: #690c80;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(194, 72, 104, 0.35);
+  box-shadow: 0 6px 20px rgba(127, 15, 153, 0.4);
 }
 
 .btnPrimary:active {

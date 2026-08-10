@@ -1,74 +1,129 @@
 import React from "react";
 import Image from "next/image";
 import { siteConfig } from "@/data/site.config";
-import { IconArrowRight } from "./icons";
+import { IconArrowRight, IconStar } from "./icons";
 import { Reveal } from "./Reveal";
 
 export const Hero: React.FC = () => {
   const { hero } = siteConfig;
   const images = hero.marqueeImages;
 
-  // Duplicate array for seamless infinite background marquee loop across screens
-  const marqueeList = [...images, ...images, ...images];
+  const leftColumnImages = [...images, ...images, ...images];
+  const rightColumnImages = [...images.slice().reverse(), ...images.slice().reverse(), ...images.slice().reverse()];
+
+  const clientAvatars = [
+    "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80",
+    "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=100&q=80",
+    "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=100&q=80",
+    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80",
+    "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80",
+    "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=100&q=80",
+  ];
 
   return (
-    <section className="relative overflow-hidden min-h-[85vh] flex items-center justify-center py-20 md:py-28 bg-ivory">
-      {/* Background Continuous Horizontal Marquee (Does NOT pause on hover) */}
-      <div className="absolute inset-0 z-0 overflow-hidden opacity-30 pointer-events-none flex items-center">
-        {/* Soft Fade Edge Overlays */}
-        <div className="absolute top-0 left-0 w-24 md:w-48 h-full bg-gradient-to-r from-ivory via-ivory/60 to-transparent z-10 pointer-events-none" aria-hidden="true" />
-        <div className="absolute top-0 right-0 w-24 md:w-48 h-full bg-gradient-to-l from-ivory via-ivory/60 to-transparent z-10 pointer-events-none" aria-hidden="true" />
-        <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-ivory to-transparent z-10 pointer-events-none" aria-hidden="true" />
-        <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-ivory to-transparent z-10 pointer-events-none" aria-hidden="true" />
+    <section className="relative w-full min-h-screen lg:h-screen lg:max-h-screen flex flex-col lg:flex-row bg-ivory overflow-hidden pb-8 lg:pb-0">
+      
+      {/* Editorial Decorative Atmosphere */}
+      <div 
+        className="absolute inset-0 pointer-events-none opacity-40 z-0 bg-[radial-gradient(ellipse_at_top_left,#F3DCE0_0%,transparent_50%),radial-gradient(ellipse_at_bottom_right,#FFFDF9_0%,transparent_50%)]" 
+        aria-hidden="true" 
+      />
 
-        {/* Continuous Marquee Track */}
-        <div className="flex gap-6 w-max animate-[marqueeScroll_35s_linear_infinite] items-center h-[90%]">
-          {marqueeList.map((imgUrl, idx) => (
-            <div
-              key={idx}
-              className="relative w-[280px] md:w-[340px] h-[360px] md:h-[440px] rounded-2xl overflow-hidden shrink-0 border border-gold/25 shadow-md"
-            >
-              <Image
-                src={imgUrl}
-                alt={`Cakes by Iram creation ${idx + 1}`}
-                fill
-                sizes="(max-width: 768px) 280px, 340px"
-                className="object-cover"
-                priority={idx < 3}
-              />
+      {/* Left Side Content Container */}
+      <div className="w-full lg:w-[55%] flex flex-col justify-center px-4 sm:px-8 md:px-12 lg:px-16 pt-24 sm:pt-28 pb-6 lg:py-0 lg:h-full relative z-10">
+        <Reveal className="space-y-5 sm:space-y-6 max-w-2xl text-center lg:text-left mx-auto lg:mx-0 flex flex-col items-center lg:items-start">
+          
+          {/* Social Proof Review Eyebrow (Centered on Mobile) */}
+          <div className="flex flex-col items-center lg:items-start text-center lg:text-left gap-2 sm:gap-3">
+            {/* Overlapping Avatars */}
+            <div className="flex -space-x-2.5 overflow-hidden shrink-0">
+              {clientAvatars.map((url, i) => (
+                <div key={i} className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-ivory overflow-hidden bg-paper shadow-xs">
+                  <Image src={url} alt={`Client avatar ${i + 1}`} width={36} height={36} className="w-full h-full object-cover" />
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-      </div>
+            {/* Stars & Text */}
+            <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
+              <div className="flex items-center justify-center lg:justify-start space-x-1">
+                {[...Array(5)].map((_, i) => (
+                  <IconStar key={i} className="w-4 h-4 sm:w-5 sm:h-5 fill-gold text-gold" />
+                ))}
+                <span className="text-xs sm:text-sm font-bold text-plum ml-1">5.0</span>
+              </div>
+              <span className="text-[10px] sm:text-xs uppercase font-bold tracking-wider text-berry">
+                TRUSTED BY 400+ HAPPY CUSTOMERS
+              </span>
+            </div>
+          </div>
 
-      {/* Centered Hero Content */}
-      <div className="relative z-10 container flex flex-col items-center justify-center text-center">
-        <Reveal className="max-w-3xl w-full bg-ivory/85 backdrop-blur-md p-8 md:p-12 rounded-3xl border border-gold/30 shadow-[0_16px_40px_rgba(74,25,66,0.1)] flex flex-col items-center text-center">
-          <span className="eyebrow justify-center">{hero.eyebrow}</span>
-          <h1 className="text-[2.75rem] md:text-[4.25rem] font-medium tracking-tight mb-5 text-plum font-display leading-[1.1] text-center">
+          {/* Heading (Centered on Mobile) */}
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-display font-medium tracking-tight text-plum leading-[1.08] text-center lg:text-left">
             {hero.headlineTop}{" "}
-            <span className="italic font-normal text-berry">{hero.headlineEmphasis}</span>
+            <span className="font-script font-normal text-berry italic text-4xl sm:text-6xl lg:text-7xl block sm:inline mt-1 sm:mt-0">
+              {hero.headlineEmphasis}
+            </span>
           </h1>
-          <p className="text-[1.125rem] md:text-[1.25rem] text-ink opacity-90 mb-8 max-w-[620px] font-body text-center leading-relaxed">
+
+          {/* Subheading (Centered on Mobile) */}
+          <p className="font-body text-ink/90 text-xs sm:text-base leading-relaxed max-w-xl text-center lg:text-left mx-auto lg:mx-0">
             {hero.subtext}
           </p>
 
-          <div className="flex flex-wrap gap-4 items-center justify-center">
-            <a href="#contact" className="btnPrimary">
-              {hero.primaryCta} <IconArrowRight />
+          {/* Buttons (Side-by-Side on Mobile) */}
+          <div className="grid grid-cols-2 gap-2.5 sm:flex sm:flex-row justify-center lg:justify-start sm:gap-4 pt-1 w-full max-w-xs sm:max-w-none mx-auto lg:mx-0">
+            <a
+              href="#contact"
+              className="btnPrimary px-2.5 py-3  rounded-full text-sm font-bold uppercase tracking-wider justify-center shadow-lg hover:scale-105 transition-all duration-300 truncate"
+            >
+              <span>{hero.primaryCta}</span>
+              <IconArrowRight className="w-3.5 h-3.5 ml-1 hidden sm:inline" />
             </a>
-            <a href="#gallery" className="btnGhost">
-              {hero.secondaryCta}
+            <a
+              href="#gallery"
+              className="btnGhost px-2.5 py-3 sm:px-8 sm:py-3.5 rounded-full text-[11px] sm:text-xs font-bold uppercase tracking-wider justify-center hover:scale-105 transition-all duration-300 truncate"
+            >
+              <span>{hero.secondaryCta}</span>
             </a>
           </div>
 
-          {/* Floating Badge */}
-          <div className="mt-8 inline-flex items-center gap-2.5 px-5 py-2.5 bg-paper border border-gold/35 rounded-full shadow-md whitespace-nowrap">
-            <span className="w-2 h-2 rounded-full bg-berry shadow-[0_0_8px_#C24868] shrink-0" />
-            <span className="font-body text-[0.8125rem] font-semibold text-plum">{hero.badge}</span>
-          </div>
         </Reveal>
       </div>
+
+      {/* Right Side: Vertical Image Marquee (Visible in Mobile Viewport with Fade-in) */}
+      <div className="w-full lg:w-[45%] h-[380px] sm:h-[480px] lg:h-full relative overflow-hidden flex items-center z-10 mt-4 lg:mt-0">
+        
+        {/* Top & Bottom gradient fades for seamless scrolling edge transitions */}
+        <div className="absolute -top-0.5 left-0 right-0 h-20 lg:h-28 bg-gradient-to-b from-ivory via-ivory/85 to-transparent z-20 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 right-0 h-20 lg:h-28 bg-gradient-to-t from-ivory via-ivory/85 to-transparent z-20 pointer-events-none" />
+
+        <div className="grid grid-cols-2 gap-3 sm:gap-4 w-full h-full px-4 lg:px-6 py-0">
+          
+          {/* Left Column Marquee - Scrolls Upwards */}
+          <div className="w-full h-full overflow-hidden relative">
+            <div className="space-y-3 sm:space-y-4 flex flex-col animate-[marqueeVerticalUp_44s_linear_infinite] hover:[animation-play-state:paused]">
+              {leftColumnImages.map((url, index) => (
+                <div key={`left-img-${index}`} className="relative aspect-[9/16] w-full rounded-2xl overflow-hidden border border-gold/25 bg-paper shadow-xl hover:scale-[1.02] transition-transform duration-300">
+                  <Image src={url} alt={`Cake creation showcase left ${index + 1}`} fill sizes="300px" className="w-full h-full object-cover" />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Right Column Marquee - Scrolls Downwards */}
+          <div className="w-full h-full overflow-hidden relative">
+            <div className="space-y-3 sm:space-y-4 flex flex-col animate-[marqueeVerticalDown_44s_linear_infinite] hover:[animation-play-state:paused]">
+              {rightColumnImages.map((url, index) => (
+                <div key={`right-img-${index}`} className="relative aspect-[9/16] w-full rounded-2xl overflow-hidden border border-gold/25 bg-paper shadow-xl hover:scale-[1.02] transition-transform duration-300">
+                  <Image src={url} alt={`Cake creation showcase right ${index + 1}`} fill sizes="300px" className="w-full h-full object-cover" />
+                </div>
+              ))}
+            </div>
+          </div>
+
+        </div>
+      </div>
+
     </section>
   );
 };

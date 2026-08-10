@@ -128,13 +128,13 @@ export const siteConfig: SiteConfig = {
     ink: "#2B1B22",
   },
   hero: {
-    eyebrow: "Bespoke Cakes · Birmingham",
+    eyebrow: "400+ Happy Customers · 5.0 Star Rating",
     headlineTop: "Cakes made to",
     headlineEmphasis: "remember.",
     subtext: "Handcrafted wedding & celebration cakes designed with elegance, baked fresh in Birmingham.",
-    primaryCta: "Enquire for your date",
+    primaryCta: "Enquire ",
     secondaryCta: "See our cakes",
-    badge: "Now booking · Birmingham & surrounding areas",
+    badge: "Now booking · 400+ Happy Customers in Birmingham",
     marqueeImages: [
       "https://res.cloudinary.com/dokrpo5fl/image/upload/v1786130771/757656924_18100284815184797_1719305328659117142_n_mz0mhq.jpg",
       "https://res.cloudinary.com/dokrpo5fl/image/upload/v1786130772/757701178_18100252148184797_5995927474108890805_n_tbknqz.jpg",

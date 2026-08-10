@@ -25,9 +25,19 @@ module.exports = {
           '0%': { transform: 'translateX(0)' },
           '100%': { transform: 'translateX(-50%)' },
         },
+        marqueeVerticalUp: {
+          '0%': { transform: 'translateY(0)' },
+          '100%': { transform: 'translateY(-50%)' },
+        },
+        marqueeVerticalDown: {
+          '0%': { transform: 'translateY(-50%)' },
+          '100%': { transform: 'translateY(0)' },
+        },
       },
       animation: {
         marqueeScroll: 'marqueeScroll 24s linear infinite',
+        marqueeVerticalUp: 'marqueeVerticalUp 28s linear infinite',
+        marqueeVerticalDown: 'marqueeVerticalDown 32s linear infinite',
       },
     },
   },
