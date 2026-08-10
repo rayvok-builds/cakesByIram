@@ -5,6 +5,8 @@ import { siteConfig } from "@/data/site.config";
 import { IconInstagram, IconMail } from "./icons";
 import { Reveal } from "./Reveal";
 
+import ButtonCrossArrow from "./ButtonCrossArrow";
+
 export const CTA: React.FC = () => {
   const { cta, business, flavours } = siteConfig;
 
@@ -193,9 +195,11 @@ export const CTA: React.FC = () => {
                   </div>
                 </div>
 
-                <button type="submit" className="btnPrimary w-full py-4 text-base">
-                  Submit Enquiry &rarr;
-                </button>
+                <ButtonCrossArrow
+                  text="Submit Enquiry"
+                  variant="primary"
+                  className="w-full"
+                />
               </form>
             )}
           </Reveal>

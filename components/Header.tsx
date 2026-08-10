@@ -5,6 +5,8 @@ import Image from "next/image";
 import { siteConfig } from "@/data/site.config";
 import { IconMenu, IconClose } from "./icons";
 
+import ButtonCrossArrow from "./ButtonCrossArrow";
+
 export const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -76,10 +78,13 @@ export const Header: React.FC = () => {
         </nav>
 
         {/* Action Button */}
-        <div className="flex items-center gap-4">
-          <a href="#contact" className="btnPrimary px-4 py-2 sm:px-6 sm:py-3 text-xs sm:text-sm font-semibold">
-            Enquire
-          </a>
+        <div className="flex items-center  gap-4">
+          <ButtonCrossArrow
+            href="#contact"
+            text="Enquire"
+            variant="primary"
+            className=" "
+          />
         </div>
       </div>
     </header>

@@ -1,8 +1,9 @@
 import React from "react";
 import Image from "next/image";
 import { siteConfig } from "@/data/site.config";
-import { IconArrowRight, IconStar } from "./icons";
+import { IconStar } from "./icons";
 import { Reveal } from "./Reveal";
+import ButtonCrossArrow from "./ButtonCrossArrow";
 
 export const Hero: React.FC = () => {
   const { hero } = siteConfig;
@@ -72,16 +73,14 @@ export const Hero: React.FC = () => {
 
           {/* Buttons (Side-by-Side on Mobile) */}
           <div className="grid grid-cols-2 gap-2.5 sm:flex sm:flex-row justify-center lg:justify-start sm:gap-4 pt-1 w-full max-w-xs sm:max-w-none mx-auto lg:mx-0">
-            <a
+            <ButtonCrossArrow
               href="#contact"
-              className="btnPrimary px-2.5 py-3  rounded-full text-sm font-bold uppercase tracking-wider justify-center shadow-lg hover:scale-105 transition-all duration-300 truncate"
-            >
-              <span>{hero.primaryCta}</span>
-              <IconArrowRight className="w-3.5 h-3.5 ml-1 hidden sm:inline" />
-            </a>
+              text={hero.primaryCta}
+              variant="primary"
+            />
             <a
               href="#gallery"
-              className="btnGhost px-2.5 py-3 sm:px-8 sm:py-3.5 rounded-full text-[11px] sm:text-xs font-bold uppercase tracking-wider justify-center hover:scale-105 transition-all duration-300 truncate"
+              className="btnGhost px-6 py-3.5 rounded-full text-xs font-bold uppercase tracking-widest justify-center hover:scale-105 transition-all duration-300 truncate"
             >
               <span>{hero.secondaryCta}</span>
             </a>
@@ -90,7 +89,7 @@ export const Hero: React.FC = () => {
         </Reveal>
       </div>
 
-      {/* Right Side: Vertical Image Marquee (Visible in Mobile Viewport with Fade-in) */}
+      {/* Right Side: Continuous Non-Stopping Vertical Image Marquee (Visible in Mobile Viewport with Fade-in) */}
       <div className="w-full lg:w-[45%] h-[380px] sm:h-[480px] lg:h-full relative overflow-hidden flex items-center z-10 mt-4 lg:mt-0">
         
         {/* Top & Bottom gradient fades for seamless scrolling edge transitions */}
@@ -99,23 +98,35 @@ export const Hero: React.FC = () => {
 
         <div className="grid grid-cols-2 gap-3 sm:gap-4 w-full h-full px-4 lg:px-6 py-0">
           
-          {/* Left Column Marquee - Scrolls Upwards */}
+          {/* Left Column Marquee - Scrolls Upwards Continuously */}
           <div className="w-full h-full overflow-hidden relative">
-            <div className="space-y-3 sm:space-y-4 flex flex-col animate-[marqueeVerticalUp_44s_linear_infinite] hover:[animation-play-state:paused]">
+            <div className="space-y-3 sm:space-y-4 flex flex-col animate-[marqueeVerticalUp_44s_linear_infinite]">
               {leftColumnImages.map((url, index) => (
-                <div key={`left-img-${index}`} className="relative aspect-[9/16] w-full rounded-2xl overflow-hidden border border-gold/25 bg-paper shadow-xl hover:scale-[1.02] transition-transform duration-300">
-                  <Image src={url} alt={`Cake creation showcase left ${index + 1}`} fill sizes="300px" className="w-full h-full object-cover" />
+                <div key={`left-img-${index}`} className="relative aspect-[4/5] w-full rounded-2xl overflow-hidden border border-gold/25 bg-paper shadow-xl group cursor-pointer shrink-0">
+                  <Image 
+                    src={url} 
+                    alt={`Cake creation showcase left ${index + 1}`} 
+                    fill 
+                    sizes="350px" 
+                    className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500" 
+                  />
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Right Column Marquee - Scrolls Downwards */}
+          {/* Right Column Marquee - Scrolls Downwards Continuously */}
           <div className="w-full h-full overflow-hidden relative">
-            <div className="space-y-3 sm:space-y-4 flex flex-col animate-[marqueeVerticalDown_44s_linear_infinite] hover:[animation-play-state:paused]">
+            <div className="space-y-3 sm:space-y-4 flex flex-col animate-[marqueeVerticalDown_44s_linear_infinite]">
               {rightColumnImages.map((url, index) => (
-                <div key={`right-img-${index}`} className="relative aspect-[9/16] w-full rounded-2xl overflow-hidden border border-gold/25 bg-paper shadow-xl hover:scale-[1.02] transition-transform duration-300">
-                  <Image src={url} alt={`Cake creation showcase right ${index + 1}`} fill sizes="300px" className="w-full h-full object-cover" />
+                <div key={`right-img-${index}`} className="relative aspect-[4/5] w-full rounded-2xl overflow-hidden border border-gold/25 bg-paper shadow-xl group cursor-pointer shrink-0">
+                  <Image 
+                    src={url} 
+                    alt={`Cake creation showcase right ${index + 1}`} 
+                    fill 
+                    sizes="350px" 
+                    className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500" 
+                  />
                 </div>
               ))}
             </div>

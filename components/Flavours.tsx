@@ -48,7 +48,7 @@ export const Flavours: React.FC = () => {
 
         {/* Footnote */}
         <Reveal delay={400} className="text-center mt-14 text-[0.9375rem] text-ink opacity-90 font-body">
-          <span>{flavours.footnote}</span>{" "}
+          <span>{flavours.footnote}</span>{" "} <br className="" />
           <a
             href="#contact"
             className="text-berry font-semibold underline underline-offset-4 transition-colors duration-200 hover:text-plum"

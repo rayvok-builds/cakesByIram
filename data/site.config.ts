@@ -211,7 +211,7 @@ export const siteConfig: SiteConfig = {
   gallery: {
     eyebrow: "Our Portfolio",
     heading: "A few of our favourites.",
-    subtext: "Every cake is an original design — inspiration photos are welcomed to guide design, never copied.",
+    subtext: "Masterfully handcrafted luxury creations, custom-tailored with artful precision for your most cherished moments.",
     tiles: [
       {
         id: "g1",
@@ -369,6 +369,6 @@ export const siteConfig: SiteConfig = {
       "Delivery: Birmingham & West Midlands",
     ],
     copyright: "Cakes by Iram. All rights reserved.",
-    credit: "Cake Studio Template",
+    credit: "",
   },
 };
