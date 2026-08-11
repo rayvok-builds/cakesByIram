@@ -51,6 +51,8 @@ export interface SiteConfig {
     email: string;
     phone: string;
     phoneUrl: string;
+    whatsAppNumber: string;
+    whatsAppUrl: string;
   };
   theme: ThemeConfig;
   hero: {
@@ -117,6 +119,8 @@ export const siteConfig: SiteConfig = {
     email: "iram-hussain@outlook.com",
     phone: "+44 7871 394253",
     phoneUrl: "tel:+447871394253",
+    whatsAppNumber: "447871394253",
+    whatsAppUrl: "https://wa.me/447871394253",
   },
   theme: {
     plum: "#4A1942",

@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { siteConfig } from "@/data/site.config";
-import { IconInstagram, IconMail } from "./icons";
+import { IconInstagram, IconMail, IconWhatsApp } from "./icons";
 import { Reveal } from "./Reveal";
 
 import ButtonCrossArrow from "./ButtonCrossArrow";
@@ -19,18 +19,20 @@ export const CTA: React.FC = () => {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [whatsappUrl, setWhatsappUrl] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    const message = `Hello *Cakes by Iram*! 👋\n\nI would like to submit a cake enquiry:\n\n👤 *Name:* ${formData.name}\n📞 *Contact Number:* ${formData.phone}\n📅 *Date & Time Needed:* ${formData.dateTime}\n🍰 *Preferred Flavour:* ${formData.flavour}\n✨ *Desired Cake Design:* ${formData.design}`;
+
+    const cleanPhone = business.whatsAppNumber || business.phone.replace(/[^0-9]/g, "");
+    const url = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
+
+    setWhatsappUrl(url);
     setSubmitted(true);
 
-    // Create a pre-filled mailto link for direct submission
-    const subject = encodeURIComponent(`New Cake Enquiry from ${formData.name}`);
-    const body = encodeURIComponent(
-      `Name: ${formData.name}\nContact Number: ${formData.phone}\nDate & Time Needed: ${formData.dateTime}\nPreferred Flavour: ${formData.flavour}\n\nDesired Cake Design:\n${formData.design}`
-    );
-
-    window.location.href = `mailto:${business.email}?subject=${subject}&body=${body}`;
+    window.open(url, "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -46,9 +48,24 @@ export const CTA: React.FC = () => {
           {/* Direct Quick Contact Sidebar (LEFT SIDE) */}
           <Reveal delay={150} className="bg-paper rounded-3xl p-7 md:p-9 border border-gold/25 shadow-[0_10px_30px_rgba(74,25,66,0.06)]">
             <h3 className="text-2xl text-plum mb-2 font-display">Direct Contact</h3>
-            <p className="text-[0.9375rem] text-ink opacity-80 mb-7 leading-relaxed font-body">Prefer to chat directly? Reach out anytime via Instagram DM, phone, or email.</p>
+            <p className="text-[0.9375rem] text-ink opacity-80 mb-7 leading-relaxed font-body">Prefer to chat directly? Reach out anytime via WhatsApp, phone, or Instagram DM.</p>
 
             <div className="flex flex-col gap-5">
+              <a
+                href={business.whatsAppUrl || `https://wa.me/${business.whatsAppNumber}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 p-3.5 md:p-4 rounded-xl bg-ivory border border-berry/40 transition-all duration-200 hover:translate-x-1 hover:border-berry shadow-sm"
+              >
+                <div className="w-10 h-10 rounded-full bg-berry text-white flex items-center justify-center text-lg shrink-0">
+                  <IconWhatsApp />
+                </div>
+                <div>
+                  <span className="block font-body text-[0.75rem] font-semibold text-berry uppercase tracking-wider">WhatsApp Us</span>
+                  <span className="block font-body text-[0.9375rem] font-medium text-plum break-all">{business.phone}</span>
+                </div>
+              </a>
+
               <a
                 href={business.instagramUrl}
                 target="_blank"
@@ -70,21 +87,8 @@ export const CTA: React.FC = () => {
               >
                 <div className="w-10 h-10 rounded-full bg-blush text-berry flex items-center justify-center text-lg shrink-0">📞</div>
                 <div>
-                  <span className="block font-body text-[0.75rem] font-semibold text-berry uppercase tracking-wider">Call / WhatsApp</span>
+                  <span className="block font-body text-[0.75rem] font-semibold text-berry uppercase tracking-wider">Call Us</span>
                   <span className="block font-body text-[0.9375rem] font-medium text-plum break-all">{business.phone}</span>
-                </div>
-              </a>
-
-              <a
-                href={`mailto:${business.email}`}
-                className="flex items-center gap-4 p-3.5 md:p-4 rounded-xl bg-ivory border border-gold/15 transition-all duration-200 hover:translate-x-1 hover:border-berry"
-              >
-                <div className="w-10 h-10 rounded-full bg-blush text-berry flex items-center justify-center text-lg shrink-0">
-                  <IconMail />
-                </div>
-                <div>
-                  <span className="block font-body text-[0.75rem] font-semibold text-berry uppercase tracking-wider">Email Us</span>
-                  <span className="block font-body text-[0.9375rem] font-medium text-plum break-all">{business.email}</span>
                 </div>
               </a>
             </div>
@@ -94,14 +98,27 @@ export const CTA: React.FC = () => {
           <Reveal delay={250} className="bg-paper rounded-3xl p-8 md:p-10 border border-gold/25 shadow-[0_10px_30px_rgba(74,25,66,0.06)]">
             {submitted ? (
               <div className="text-center py-8 px-4 flex flex-col items-center gap-4">
-                <div className="w-14 h-14 rounded-full bg-berry text-white text-2xl flex items-center justify-center mb-2">✓</div>
+                <div className="w-14 h-14 rounded-full bg-berry text-white text-2xl flex items-center justify-center mb-2">
+                  <IconWhatsApp />
+                </div>
                 <h3 className="text-2xl font-display text-plum">Thank you, {formData.name}!</h3>
                 <p className="text-ink opacity-85 max-w-[440px] font-body">
-                  Your enquiry details have been prepared. Your email client will open shortly to send your message to <strong>{business.email}</strong>.
+                  Your enquiry details have been formatted. We have opened WhatsApp to send your message directly to <strong>{business.phone}</strong>.
                 </p>
+                {whatsappUrl && (
+                  <a
+                    href={whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btnPrimary mt-2 flex items-center justify-center gap-2"
+                  >
+                    <IconWhatsApp />
+                    <span>Open WhatsApp Chat</span>
+                  </a>
+                )}
                 <button
                   type="button"
-                  className="btnGhost"
+                  className="btnGhost text-sm mt-2"
                   onClick={() => setSubmitted(false)}
                 >
                   Send another enquiry
@@ -196,7 +213,7 @@ export const CTA: React.FC = () => {
                 </div>
 
                 <ButtonCrossArrow
-                  text="Submit Enquiry"
+                  text="Send Enquiry via WhatsApp"
                   variant="primary"
                   className="w-full"
                 />
