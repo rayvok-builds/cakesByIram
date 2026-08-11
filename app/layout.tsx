@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Fraunces, Work_Sans, Caveat } from "next/font/google";
 import { siteConfig } from "@/data/site.config";
 import "./globals.css";
+import { PreloaderProvider } from "@/components/PreloaderContext";
+import PagePreloader from "@/components/PagePreloader";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -54,7 +56,13 @@ export default function RootLayout({
       lang="en"
       className={`${fraunces.variable} ${workSans.variable} ${caveat.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        <PreloaderProvider>
+          <PagePreloader />
+          {children}
+        </PreloaderProvider>
+      </body>
     </html>
   );
 }
+
